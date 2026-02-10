@@ -150,6 +150,7 @@ function applyRoleLimits() {
         // Админу показываем всё
         document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('hidden'));
         loadUsers(); // Загружаем список пользователей для админки
+        switchTab('dashboard'); // Сразу переходим на дашборд
     }
 }
 

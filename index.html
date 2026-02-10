@@ -15,54 +15,119 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0f172a;
+            background: radial-gradient(circle at center, #1e293b, #0f172a);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .login-bg-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0.05) 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(-10%, -10%); }
+            100% { transform: scale(1.2) translate(10%, 10%); }
         }
 
         .login-card {
-            background: #1e293b;
-            padding: 40px;
-            border-radius: 20px;
-            width: 340px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 48px;
+            border-radius: 24px;
+            width: 380px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .login-card h1 {
             color: #fff;
-            margin-bottom: 25px;
-            font-size: 24px;
-            text-align: center;
+            margin-bottom: 8px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .login-card p {
+            color: #94a3b8;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .login-input-group {
+            position: relative;
+            margin-bottom: 20px;
         }
 
         .login-card input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #334155;
-            background: #0f172a;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
             color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
             box-sizing: border-box;
+        }
+
+        .login-card input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
         .login-card button {
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             border: none;
-            background: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: #fff;
             font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
         .login-card button:hover {
-            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .login-card button:active {
+            transform: translateY(0);
+        }
+
+        #login-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            display: none;
         }
 
         .hidden {
@@ -75,12 +140,24 @@
 
     <!-- Экран входа -->
     <div id="login-screen">
+        <div class="login-bg-blob"></div>
         <div class="login-card">
             <h1>Shop Manager <span style="color:#3b82f6">Pro</span></h1>
-            <input type="text" id="login-username" placeholder="Логин">
-            <input type="password" id="login-password" placeholder="Пароль">
-            <div id="login-error" style="color:#ef4444; font-size:12px; margin-bottom:10px; display:none;"></div>
-            <button onclick="handleLogin()">Войти в систему</button>
+            <p>Добро пожаловать в систему управления</p>
+            
+            <div id="login-error"></div>
+            
+            <div class="login-input-group">
+                <input type="text" id="login-username" placeholder="Логин">
+            </div>
+            <div class="login-input-group">
+                <input type="password" id="login-password" placeholder="Пароль">
+            </div>
+            
+            <button onclick="handleLogin()">Войти в кабинет</button>
+            <div style="margin-top: 24px; color: #64748b; font-size: 12px;">
+                v1.0.4 &bull; © 2026 Professional Solutions
+            </div>
         </div>
     </div>
 
